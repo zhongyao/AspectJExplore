@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class AopUtil {
 
-    public static void onCallMethod(String string) {
+    public void onCallMethod(String string) {
         Log.d("AspectTest", "----onCallMethod---" + string);
     }
     public void onDoSomeThing() {

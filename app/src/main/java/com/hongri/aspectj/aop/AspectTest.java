@@ -10,6 +10,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 
+/**
+ * 参考：https://mbd.baidu.com/ug_share/mbox/4a81af9963/share?tk=c12be6ea134361e65d0dd2dd52907905&share_url=https%3A%2F%2Fyebd1h.smartapps.cn%2Fpages%2Fblog%2Findex%3FblogId%3D84069529%26_swebfr%3D1%26_swebFromHost%3Dbaiduboxapp
+ */
 @Aspect
 public class AspectTest {
     final String TAG = AspectTest.class.getSimpleName();
@@ -45,22 +48,25 @@ public class AspectTest {
 //    }
 
     /**
-     * target：
+     * target【调用此方法的对象是否是Type类型的子类或者其本身】：
      * target一般用在call的情况，call一个函数，这个函数可能定义在其他类。
      * 比如testMethod是TestDerived类定义的。那么target(TestDerived)就会搜索到调用testMethod的地方。
      * 但是不包括testMethod的execution JPoint
+     *
      * @param joinPoint
      * @throws Throwable
      */
     //TODO 待调试
     //有问题
-//    @Around("call(* com.hongri.aspectj.aop.AopUtil.onCallMethod(java.lang.String)) && target(com.hongri.aspectj.aop.AopUtil)")
+    @Around("call(* *..onCallMethod(java.lang.String)) && target(com.hongri.aspectj.aop.AopUtil)")
     //没问题
-    @Around("call(* com.hongri.aspectj.aop.AopUtil.onCallMethod(java.lang.String))")
+//    @Around("call(* com.hongri.aspectj.aop.AopUtil.onCallMethod(java.lang.String))")
     public void doSomeThing(JoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         String className = joinPoint.getThis().getClass().getSimpleName();
+        String target = joinPoint.getTarget().toString();
         Log.d(TAG, "doSomeThing -- class:" + className);
         Log.d(TAG, "doSomeThing -- method:" + methodSignature.getName());
+        Log.d(TAG, "doSomeThing -- target:" + target);
     }
 }

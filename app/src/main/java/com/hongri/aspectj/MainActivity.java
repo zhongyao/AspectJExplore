@@ -15,9 +15,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AopUtil.onCallMethod("哈哈");
+//        AopUtil.onCallMethod("哈哈");
 //        AopUtil2.onCallMethod("哈哈2");
 
+        onCallMethod("hello");
+
         Log.d("AspectTest", "onCreate()方法");
+    }
+
+    public void onCallMethod(String string) {
+        new AopUtil().onCallMethod("world");
     }
 }
