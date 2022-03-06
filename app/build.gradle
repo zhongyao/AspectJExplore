@@ -30,10 +30,14 @@ android {
 // 为了提升编译效率，可以加入过滤条件指定遍历某些库或者不遍历某些库。
 
 //aspectjx {
+      //debug阶段可以关闭AspectJX功能
+//    enabled false
 //    //织入遍历符合条件的库
 //    includeJarFilter '', ''
 //    //排除包含‘universal-image-loader’的库
 //    excludeJarFilter ''
+//    //排除所有package路径中包含`android.support`的class文件及库（jar文件）
+//    exclude 'android.support'
 //}
 
 dependencies {
